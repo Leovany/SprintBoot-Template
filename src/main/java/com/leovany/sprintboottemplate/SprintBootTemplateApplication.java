@@ -1,4 +1,4 @@
-package com.levany.sprintboottemplate;
+package com.leovany.sprintboottemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

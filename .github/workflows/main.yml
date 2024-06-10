@@ -27,13 +27,17 @@ jobs:
           distribution: 'temurin'
           cache: maven # 使用maven缓存，避免每次构建项目时都要重新下载maven依赖
 
-      - name: Build docker image V2
+      - name: Build docker image
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令
           docker build -t dingsai-backend:0.1 .    # 构建docker镜像，命令最后的点代表Dockerfile所在目录
           docker save -o dingsai-backend.tar dingsai-backend:0.1 # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
+
+      - name: Print file size
+        run: |
           FILE_PATH="./dingsai-backend.tar"  # 替换为你的生成文件路径
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
+
       # 删除旧的docker镜像
       # 使用sshpass以非交互式的用户名密码方式登录远程服务器
       # 停止运行中的docker容器、删除该容器、删除镜像

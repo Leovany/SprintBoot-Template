@@ -12,6 +12,7 @@ jobs:
 
     runs-on: ubuntu-latest # 运行在虚拟机上，指定虚拟机及其版本
     env:
+      port: 8081
       project-name: $GITHUB_REPOSITORY
       branch-name: ${GITHUB_REF##*/}
     # 工作流步骤
@@ -20,6 +21,14 @@ jobs:
     # name：任务名字
     # uses：使用github提供的某个action，每个action都有不同的用途
     steps:
+      - name: Print Environment
+        run:
+          echo $GITHUB_REPOSITORY
+          echo ${GITHUB_REF##*/}
+          echo "项目名称：$project-name"
+          echo $branch-name
+          echo $port
+
       - name: pull latest code
         uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中
 
@@ -40,10 +49,7 @@ jobs:
           FILE_PATH="./dingsai-backend.tar"  # 替换为你的生成文件路径
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
-          echo $GITHUB_REPOSITORY
-          echo ${GITHUB_REF##*/}
-          echo "项目名称：$project-name"
-          echo $branch-name
+         
           
 
       # 删除旧的docker镜像

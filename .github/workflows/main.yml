@@ -15,7 +15,7 @@ jobs:
       port: 8081
       port_name: 8082
       project_name: ${{GITHUB_REPOSITORY}}
-      branch_name: ${{GITHUB_REF##*/}}
+      branch_name: ${GITHUB_REF##*/}
     # 工作流步骤
     # 写在steps中
     # 每个 - 即代表一个任务
@@ -27,7 +27,7 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo ${GITHUB_REF##*/}
           echo "项目名称：${project_name}"
-          echo $branch_name
+          echo ${branch_name}
           echo $port
           echo $port_name
 #      - name: pull latest code

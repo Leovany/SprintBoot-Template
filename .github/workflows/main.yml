@@ -14,7 +14,7 @@ jobs:
     env:
       port: 8081
       port_name: 8082
-      project_name: ${{GITHUB_REPOSITORY}}
+      project_name: ${{github.repository}}
       branch_name: ${GITHUB_REF##*/}
     # 工作流步骤
     # 写在steps中

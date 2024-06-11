@@ -11,6 +11,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest # 运行在虚拟机上，指定虚拟机及其版本
+    env:
+      project-name: $GITHUB_REPOSITORY
+      branch-name: ${GITHUB_REF##*/}
     # 工作流步骤
     # 写在steps中
     # 每个 - 即代表一个任务
@@ -37,23 +40,25 @@ jobs:
           FILE_PATH="./dingsai-backend.tar"  # 替换为你的生成文件路径
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
+          echo "项目名称：$project-name"
+          echo $branch-name
 
       # 删除旧的docker镜像
       # 使用sshpass以非交互式的用户名密码方式登录远程服务器
       # 停止运行中的docker容器、删除该容器、删除镜像
       # docker命令后面的两条竖线 || 代表当前面的docker命令执行失败时，命令可以继续往下执行，这样做的原因是在第一次构建项目的时候肯定不会存在这些容器和镜像，此时删除或停止这些容器就会失败
-      - name: delete old docker image
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker stop dingsai-backend || true && docker rm dingsai-backend || true && docker rmi dingsai-backend:0.1 || true"
-
-      # 删除旧的docker镜像压缩包
-      - name: delete old docker tar
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f dingsai-backend.tar"
-      # 上传新的docker镜像
-      - name: upload new docker image and start-up script
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} scp -r -o StrictHostKeyChecking=no ./dingsai-backend.tar root@${{secrets.REMOTE_SERVER01_IP}}:${{secrets.REMOTE_PROJECT_CATALOGUE}}
-      # 加载tar文件，加载docker镜像
-      - name: load new docker image
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker load -i ${{secrets.REMOTE_PROJECT_CATALOGUE}}/dingsai-backend.tar"
-      # docker run 运行，启动容器
-      - name: run project
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker run -d -p 8081:8080 --name dingsai-backend dingsai-backend:0.1"
+#      - name: delete old docker image
+#        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker stop dingsai-backend || true && docker rm dingsai-backend || true && docker rmi dingsai-backend:0.1 || true"
+#
+#      # 删除旧的docker镜像压缩包
+#      - name: delete old docker tar
+#        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f dingsai-backend.tar"
+#      # 上传新的docker镜像
+#      - name: upload new docker image and start-up script
+#        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} scp -r -o StrictHostKeyChecking=no ./dingsai-backend.tar root@${{secrets.REMOTE_SERVER01_IP}}:${{secrets.REMOTE_PROJECT_CATALOGUE}}
+#      # 加载tar文件，加载docker镜像
+#      - name: load new docker image
+#        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker load -i ${{secrets.REMOTE_PROJECT_CATALOGUE}}/dingsai-backend.tar"
+#      # docker run 运行，启动容器
+#      - name: run project
+#        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker run -d -p 8081:8080 --name dingsai-backend dingsai-backend:0.1"

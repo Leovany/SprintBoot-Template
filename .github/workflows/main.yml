@@ -42,14 +42,14 @@ jobs:
             cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} 
             rm -f pom.xml
       
-      - name: rm Jar  # 删除JAR文件
-        uses: appleboy/ssh-action@master  # 使用appleboy的ssh-action，用于在服务器上执行SSH命令
-        with:
-          host: ${{Host_IP}}  # 设置服务器主机
-          username: ${{Host_Role}}  # 设置服务器用户名
-          key: ${{Host_PWD}}  # 设置SSH密钥
-          script: |
-            cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f pom.xml
+      # - name: rm Jar  # 删除JAR文件
+      #   uses: appleboy/ssh-action@master  # 使用appleboy的ssh-action，用于在服务器上执行SSH命令
+      #   with:
+      #     host: ${{Host_IP}}  # 设置服务器主机
+      #     username: ${{Host_Role}}  # 设置服务器用户名
+      #     key: ${{Host_PWD}}  # 设置SSH密钥
+      #     script: |
+      #       cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f pom.xml
            
 
       # - name: Define remote SSH command base

@@ -37,6 +37,12 @@ jobs:
       - name: Define remote SSH command base
         run: | 
           echo "SSH_BASE='sshpass -p \"$Host_PWD\" ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV
+
+      - name: delete old docker tar2
+        run: |
+          sshpass -p $Host_PWD ssh -o StrictHostKeyChecking=no root@$Host_IP "rm -f /cicd/pom.xml"
+  
+          
       # 删除旧的docker镜像压缩包
       - name: delete old docker tar
         run: |

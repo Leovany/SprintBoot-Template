@@ -14,8 +14,8 @@ jobs:
     env:
       port: 8081
       port_name: 8082
-      project_name: ${{github.repository}}
-      branch_name: ${{github.ref##*/}}
+      # project_name: ${{github.repository}}
+      # branch_name: ${{github.ref##*/}}
     # 工作流步骤
     # 写在steps中
     # 每个 - 即代表一个任务
@@ -24,12 +24,14 @@ jobs:
     steps:
       - name: Print Environment
         run: | 
-          echo $GITHUB_REPOSITORY
-          echo ${GITHUB_REF##*/}
-          echo "项目名称：${project_name}"
-          echo ${branch_name}
           echo $port
           echo $port_name
+          echo "端口号:$port"
+          echo $GITHUB_REPOSITORY
+          echo ${GITHUB_REF##*/}
+          # echo "项目名称：${project_name}"
+          # echo ${branch_name}
+          
 #      - name: pull latest code
 #        uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中
 #

@@ -39,6 +39,10 @@ jobs:
       - name: Define remote SSH command base
         run: | 
           echo "SSH_BASE='sshpass -p $Host_PWD ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV
+      # 删除旧的docker镜像压缩包
+      - name: delete old docker tar
+        run: |
+          $SSH_BASE "cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f /cicd/pom.xml"
 
 #      - name: pull latest code
 #        uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中

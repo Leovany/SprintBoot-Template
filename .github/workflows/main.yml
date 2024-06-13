@@ -48,6 +48,7 @@ jobs:
         run: |
           echo $SSH_BASE
           ${{SSH_BASE}} "rm -f /cicd/pom.xml"
+          echo ""
 
 #      - name: pull latest code
 #        uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中

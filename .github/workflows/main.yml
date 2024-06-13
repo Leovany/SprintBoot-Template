@@ -42,6 +42,10 @@ jobs:
           
       - name: delete old docker tar
         run: |
-          echo $SSH_BASE
+          # echo $SSH_BASE
+          # $SSH_BASE "rm -f /cicd/pom.xml"
+          # echo ""
+          SSH_BASE="sshpass -p '${Host_PWD}' ssh -o StrictHostKeyChecking=no ${Host_Role}@${Host_IP}"
+          echo "SSH_BASE='${SSH_BASE}'" >> $GITHUB_ENV
+          echo "Running SSH command..."
           $SSH_BASE "rm -f /cicd/pom.xml"
-          echo ""

@@ -22,11 +22,6 @@ jobs:
       Host_Role: root
       # project_name: ${{github.repository}}
       # branch_name: ${{github.ref##*/}}
-    # 工作流步骤
-    # 写在steps中
-    # 每个 - 即代表一个任务
-    # name：任务名字
-    # uses：使用github提供的某个action，每个action都有不同的用途
     steps:
       - name: Print Environment
         run: | 
@@ -36,6 +31,9 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
+      - name: Install sshpass  # 安装 sshpass 工具
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+        
       - name: Define remote SSH command base
         run: | 
           echo "SSH_BASE='sshpass -p $Host_PWD ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV

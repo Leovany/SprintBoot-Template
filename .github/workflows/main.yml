@@ -32,12 +32,12 @@ jobs:
           echo ${Host_IP}
           echo ${Host_PWD}
 
-      - name: Run sshpass commands
+      - name: Run sshpass commands2
         uses: matheusvanzan/sshpass-action@v2
         with:
-          host: $Host_IP
-          user: $Host_Role
-          pass: $Host_PWD
+          host: ${{secrets.REMOTE_SERVER01_IP}}
+          user: root
+          pass: ${{secrets.REMOTE_SERVER01_PWD}}
           run: |
             cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} 
             rm -f pom.xml

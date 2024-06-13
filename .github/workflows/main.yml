@@ -47,7 +47,7 @@ jobs:
       - name: delete old docker tar
         run: |
           echo $SSH_BASE
-          ${{SSH_BASE}} "rm -f /cicd/pom.xml"
+          $SSH_BASE "rm -f /cicd/pom.xml"
           echo ""
 
 #      - name: pull latest code

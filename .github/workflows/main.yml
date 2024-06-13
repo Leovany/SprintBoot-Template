@@ -12,8 +12,14 @@ jobs:
 
     runs-on: ubuntu-latest # 运行在虚拟机上，指定虚拟机及其版本
     env:
-      port: 8081
-      port_name: 8082
+      # 端口号
+      Port: 8081      
+      # 云服务地址
+      Host_IP: ${{secrets.REMOTE_SERVER01_IP}}
+      # 云服务密码
+      Host_PWD: ${{secrets.REMOTE_SERVER01_PWD}}
+      # 账号
+      Host_Role: root
       # project_name: ${{github.repository}}
       # branch_name: ${{github.ref##*/}}
     # 工作流步骤
@@ -24,14 +30,16 @@ jobs:
     steps:
       - name: Print Environment
         run: | 
-          echo $port
-          echo $port_name
-          echo "端口号:$port"
+          echo $Port
+          echo "端口号:$Port"
           echo $GITHUB_REPOSITORY
           echo ${GITHUB_REF##*/}
-          # echo "项目名称：${project_name}"
-          # echo ${branch_name}
-          
+          echo ${Host_IP}
+          echo ${Host_PWD}
+      - name: Define remote SSH command base
+        run: | 
+          echo "SSH_BASE='sshpass -p $Host_PWD ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV
+
 #      - name: pull latest code
 #        uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中
 #

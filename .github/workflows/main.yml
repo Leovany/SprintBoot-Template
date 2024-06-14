@@ -23,7 +23,7 @@ jobs:
       # Project_Name: ${{GITHUB_REPOSITORY}}
     steps:
       - name: 设置项目名称环境变量
-        run: echo "Project_Name=${GITHUB_REPOSITORY}" >> $GITHUB_ENV
+        run: echo "Project_Name=$GITHUB_REPOSITORY" >> $GITHUB_ENV
         
       - name: Print Environment
         run: | 

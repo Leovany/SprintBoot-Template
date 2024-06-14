@@ -20,9 +20,11 @@ jobs:
       Host_PWD: ${{secrets.REMOTE_SERVER01_PWD}}
       # 账号
       Host_Role: root
-      Project_Name: ${{GITHUB_REPOSITORY}}
+      # Project_Name: ${{GITHUB_REPOSITORY}}
     steps:
-    
+      - name: 设置项目名称环境变量
+        run: echo "Project_Name=${GITHUB_REPOSITORY}" >> $GITHUB_ENV
+        
       - name: Print Environment
         run: | 
           echo $Port

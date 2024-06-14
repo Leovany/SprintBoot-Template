@@ -35,9 +35,9 @@ jobs:
       - name: Run sshpass commands4
         uses: matheusvanzan/sshpass-action@v2
         with:
-          host: ${{secrets.REMOTE_SERVER01_IP}}
+          host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
-          pass: ${{secrets.REMOTE_SERVER01_PWD}}
+          pass: ${{env.Host_PWD}}
           run: |
             cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} 
             rm -f pom.xml

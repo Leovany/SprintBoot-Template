@@ -36,7 +36,7 @@ jobs:
         uses: matheusvanzan/sshpass-action@v2
         with:
           host: ${{secrets.REMOTE_SERVER01_IP}}
-          user: ${{Host_Role}}
+          user: ${{env.Host_Role}}
           pass: ${{secrets.REMOTE_SERVER01_PWD}}
           run: |
             cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} 

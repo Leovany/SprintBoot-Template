@@ -33,7 +33,7 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
-          ehco $Project_Name
+          ehco ${{env.Project_Name}}
 
       - name: Run sshpass commands4
         uses: matheusvanzan/sshpass-action@v2

@@ -20,7 +20,7 @@ jobs:
       Host_PWD: ${{secrets.REMOTE_SERVER01_PWD}}
       # 账号
       Host_Role: root
-     
+      Project_Name: ${{GITHUB_REPOSITORY}}
     steps:
     
       - name: Print Environment
@@ -31,6 +31,7 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
+          ehco ${{env.Project_Name}}
 
       - name: Run sshpass commands4
         uses: matheusvanzan/sshpass-action@v2

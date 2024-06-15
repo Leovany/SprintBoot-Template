@@ -40,9 +40,9 @@ jobs:
           echo "版本号: $VERSION"
 
           
-          echo "项目名称2: $PROJECT_NAME"
-          echo "文件名称2: $FILE_NAME"
-          echo "版本号2: $VERSION"
+          printf "项目名称2: $PROJECT_NAME"
+          printf "文件名称2: $FILE_NAME"
+          printf "版本号2: $VERSION"
           
           
           pwd

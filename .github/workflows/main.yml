@@ -96,7 +96,7 @@ jobs:
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
 
-      - name: 调试删除文件步骤
+      - name: 调试删除文件步骤2
         run: |
           set -e  # 遇到错误立即停止
           echo "Host_Dir: ${{env.Host_Dir}}"

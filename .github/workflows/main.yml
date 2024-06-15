@@ -30,7 +30,8 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
-          echo pwd
+          pwd
+          ls
           
       - name: pull latest code
         uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中
@@ -49,7 +50,8 @@ jobs:
           
       - name: Build docker image
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令    
-           echo pwd
+          pwd
+          ls
 
            
       - name: Run sshpass commands4

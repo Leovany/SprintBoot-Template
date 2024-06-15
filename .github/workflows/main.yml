@@ -71,7 +71,6 @@ jobs:
           pass: ${{env.Host_PWD}}
           run: |
             docker load -i ${{env.Host_Dir}}/${FILE_NAME}.tar
-           
 
       # docker run 运行，启动容器
       - name: Run project

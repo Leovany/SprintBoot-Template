@@ -119,7 +119,8 @@ jobs:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
-          run: |
+          run: | 
+            echo "start docker load !!"
             docker load -i ${{env.Host_Dir}}/sprintboot-template-backend.tar
 
       # docker run 运行，启动容器

@@ -20,6 +20,8 @@ jobs:
       Host_PWD: ${{secrets.REMOTE_SERVER01_PWD}}
       # 账号
       Host_Role: root
+      # 路径
+      Host_Dir: /cicd
      
     steps:
       # 定义环境变量
@@ -57,8 +59,9 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            cd ${{secrets.REMOTE_PROJECT_CATALOGUE}}
+            cd ${{env.Host_Dir}}
             rm -f pom.xml
+            
 
       
       # 拉取最新代码

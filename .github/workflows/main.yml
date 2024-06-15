@@ -111,7 +111,9 @@ jobs:
       #     pass: ${{env.Host_PWD}}
       #     run: |
       #       pwd 
-            
+      - name: upload new docker image and start-up script
+        run: | 
+          sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} scp -r -o StrictHostKeyChecking=no ./${FILE_NAME}.tar ${Host_Role}@${{secrets.REMOTE_SERVER01_IP}}:${{secrets.REMOTE_PROJECT_CATALOGUE}}     
   
 
       # 加载tar文件，加载docker镜像

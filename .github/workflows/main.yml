@@ -83,7 +83,7 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            # echo "Attempting to load ${{env.Host_Dir}}/${FILE_NAME}.tar"
+            echo "execute: docker run -d -p ${{env.Port}}:8080 --name ${FILE_NAME} ${FILE_NAME}:${VERSION}"
             docker run -d -p ${{env.Port}}:8080 --name ${FILE_NAME} ${FILE_NAME}:${VERSION}
 
       

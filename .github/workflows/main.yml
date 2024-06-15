@@ -127,7 +127,8 @@ jobs:
         uses: matheusvanzan/sshpass-action@v2
         env:
           VERSION: 0.1
-          FILE_NAME_2: sprintboot-template-backend
+          # FILE_NAME_2: sprintboot-template-backend
+          FILE_NAME_2: $FILE_NAME
         with:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}

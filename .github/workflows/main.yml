@@ -79,7 +79,8 @@ jobs:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
-          run: |
+          run: | 
+            pwd
             docker run -d -p ${{env.Port}}:8080 --name ${FILE_NAME} ${FILE_NAME}:${VERSION}
 
       

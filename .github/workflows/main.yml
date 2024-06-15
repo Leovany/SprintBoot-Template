@@ -128,7 +128,7 @@ jobs:
         env:
           VERSION: 0.1
           # FILE_NAME_2: sprintboot-template-backend
-          FILE_NAME_2: $FILE_NAME
+          FILE_NAME_2: ${FILE_NAME}
         with:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
@@ -137,6 +137,7 @@ jobs:
             echo ${{env.Port}}
             echo "版本1：${VERSION}"
             echo "版本2：${{env.VERSION}}"
+            echo "名称：${{env.FILE_NAME_2}}"
             # docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
             docker run -d -p ${{env.Port}}:8080 --name ${{env.FILE_NAME_2}} ${{env.FILE_NAME_2}}:${{env.VERSION}}
             

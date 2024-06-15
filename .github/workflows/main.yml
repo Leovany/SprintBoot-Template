@@ -71,6 +71,7 @@ jobs:
           pass: ${{env.Host_PWD}}
           run: |
             echo "Attempting to load ${{env.Host_Dir}}/${FILE_NAME}.tar"
+            echo "文件名称：${FILE_NAME}"
             docker load -i ${{env.Host_Dir}}/${FILE_NAME}.tar
 
       # docker run 运行，启动容器

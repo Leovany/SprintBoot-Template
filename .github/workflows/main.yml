@@ -38,6 +38,12 @@ jobs:
           echo "项目名称: $PROJECT_NAME"
           echo "文件名称: $FILE_NAME"
           echo "版本号: $VERSION"
+
+          
+          echo "项目名称2: $PROJECT_NAME"
+          echo "文件名称2: $FILE_NAME"
+          echo "版本号2: $VERSION"
+          
           
           pwd
           ls

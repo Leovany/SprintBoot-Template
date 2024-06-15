@@ -30,7 +30,10 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
-          echo "项目名称: $(basename $GITHUB_REPOSITORY)"
+          
+          echo "PROJECT_NAME=$(basename $GITHUB_REPOSITORY)" >> $GITHUB_ENV
+          echo "项目名称:: $PROJECT_NAME"
+          
           pwd
           ls
           
@@ -46,8 +49,8 @@ jobs:
 
       - name: Build docker image
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令
-          docker build -t dingsai-backend:0.1 .    # 构建docker镜像，命令最后的点代表Dockerfile所在目录
-          docker save -o dingsai-backend.tar dingsai-backend:0.1 # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
+          docker build -t ${PROJECT_NAME}-backend:0.1 .    # 构建docker镜像，命令最后的点代表Dockerfile所在目录
+          docker save -o  ${PROJECT_NAME}-backend.tar  ${PROJECT_NAME}-backend:0.1 # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
           
       - name: Test
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令    

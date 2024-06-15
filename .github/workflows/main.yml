@@ -83,7 +83,8 @@ jobs:
           run: |      
             echo $FILE_NAME
             echo ${{env.Port}}
-            docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
+            # docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
+            docker run -d -p 8081:8080 --name sprintboot-template-backend sprintboot-template-backend:0.1
 
       
       # # 拉取最新代码

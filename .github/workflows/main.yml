@@ -51,12 +51,11 @@ jobs:
           # echo "版本号2: ${VERSION}"
           pwd
           ls
-      - name: Use the project name from environment variable
+      - name: Use the project name from environment variable222
         run: |
           echo "Using the project name from the environment variable."
           echo "项目名称 (从环境变量): $PROJECT_NAME"
-        env:
-          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+      
           
       - name: pull latest code
         uses: actions/checkout@v3 # 使用官方的checkout action，用于将仓库中的最新代码检查并拉取到工作目录中

@@ -32,7 +32,7 @@ jobs:
           echo ${Host_PWD}
 
           PROJECT_NAME=$(basename $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
-          echo "PROJECT_NAME=$PROJECT_NAME" >> "$GITHUB_ENV"
+          # echo "PROJECT_NAME=$PROJECT_NAME" >> "$GITHUB_ENV"
           echo "项目名称: $PROJECT_NAME"
           # echo "PROJECT_NAME=$(basename $GITHUB_REPOSITORY)" >> "$GITHUB_ENV"
           # echo "项目名称: $PROJECT_NAME"

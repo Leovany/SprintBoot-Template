@@ -57,7 +57,8 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            rm -f ${{secrets.REMOTE_PROJECT_CATALOGUE}}/pom.xml
+            cd ${{secrets.REMOTE_PROJECT_CATALOGUE}}
+            rm -f pom.xml
 
       
       # 拉取最新代码

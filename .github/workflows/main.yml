@@ -82,7 +82,7 @@ jobs:
           echo "Generated file size: $FILE_SIZE_MB MB"
 
       # 删除旧的docker镜像压缩包
-      - name: delete old docker image
+      - name: delete old docker tar
         uses: matheusvanzan/sshpass-action@v2
         with:
           host: ${{env.Host_IP}}

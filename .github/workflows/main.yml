@@ -58,7 +58,8 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            rm -f ${env.Host_Dir}/pom.xml
+            rm -rf "${{ env.Host_Dir }}/pom.xml"
+          
             
 
       

@@ -116,7 +116,7 @@ jobs:
       - name: Load new docker image
         uses: matheusvanzan/sshpass-action@v2
         env:
-          FILE_NAME: ${FILE_NAME}
+          FILE_NAME: ${{FILE_NAME}}
         with:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}

@@ -95,28 +95,7 @@ jobs:
           FILE_PATH="./${FILE_NAME}.tar"  # 替换为你的生成文件路径
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
-
-      - name: 调试删除文件步骤2
-        run: |
-          set -e  # 遇到错误立即停止
-          echo "Host_Dir: ${{env.Host_Dir}}"
-          echo "FILE_NAME: ${FILE_NAME}"
-          if [[ -z "${{ env.Host_Dir }}" || -z "${FILE_NAME}" ]]; then
-            echo "Error: Host_Dir or FILE_NAME is not set"
-            exit 1
-          fi
-          if [[ ! -d "${{ env.Host_Dir }}" ]]; then
-            echo "Error: Directory ${{ env.Host_Dir }} does not exist"
-            exit 1
-          fi
-          echo "Attempting to delete ${{ env.Host_Dir }}/${FILE_NAME}.tar"
-          if [[ ! -f "${{ env.Host_Dir }}/${FILE_NAME}.tar" ]]; then
-            echo "Warning: File ${{ env.Host_Dir }}/${FILE_NAME}.tar does not exist"
-          else
-            rm -rf "${{ env.Host_Dir }}/${FILE_NAME}.tar"
-            echo "File deleted successfully"
-          fi
-       
+   
       # 删除旧的docker镜像压缩包
       - name: Delete old docker tar
         uses: matheusvanzan/sshpass-action@v2
@@ -125,7 +104,8 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            echo "Attempting to delete ${{env.Host_Dir}}/${FILE_NAME}.tar"
+            echo "Attempting to delete1 ${Host_Dir}/${FILE_NAME}.tar"
+            echo "Attempting to delete2 ${{env.Host_Dir}}/${FILE_NAME}.tar"
             rm -rf ${{env.Host_Dir}}/${FILE_NAME}.tar
             
       # 删除旧的docker镜像

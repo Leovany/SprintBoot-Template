@@ -32,7 +32,10 @@ jobs:
           echo ${Host_PWD}
           
           echo "PROJECT_NAME=$(basename $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-          echo "项目名称:: $PROJECT_NAME"
+          echo "FILE_NAME=${PROJECT_NAME}-backend" >> $GITHUB_ENV
+          echo "VERSION=0.1" >> $GITHUB_ENV
+          
+          echo "项目名称: $PROJECT_NAME"
           
           pwd
           ls
@@ -49,14 +52,20 @@ jobs:
 
       - name: Build docker image
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令
-          docker build -t ${PROJECT_NAME}-backend:0.1 .    # 构建docker镜像，命令最后的点代表Dockerfile所在目录
-          docker save -o  ${PROJECT_NAME}-backend.tar  ${PROJECT_NAME}-backend:0.1 # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
+          
+          docker build -t ${FILE_NAME}:${VERSION} .    # 构建docker镜像，命令最后的点代表Dockerfile所在目录
+          docker save -o  ${FILE_NAME}.tar  ${FILE_NAME}:${VERSION} # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
           
       - name: Test
         run: | 									   # run：该步骤要执行的命令，| 代表可以有多条命令    
           pwd
           ls
-
+          
+      - name: Print file size
+        run: |
+          FILE_PATH="./${FILE_NAME}.tar"  # 替换为你的生成文件路径
+          FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
+          echo "Generated file size: $FILE_SIZE_MB MB"
            
       - name: Run sshpass commands4
         uses: matheusvanzan/sshpass-action@v2

@@ -119,6 +119,7 @@ jobs:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
+          FILE_NAME: ${FILE_NAME}
           run: 
             docker load -i ${{env.Host_Dir}}/${FILE_NAME}.tar
 

@@ -70,8 +70,8 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            echo "Attempting to load ${{env.Host_Dir}}/${FILE_NAME}.tar"
-            echo "文件名称：${FILE_NAME}"
+            # echo "Attempting to load ${{env.Host_Dir}}/${FILE_NAME}.tar"
+            # echo "文件名称：${FILE_NAME}"
             cd ${{ env.Host_Dir}}
             docker load -i ${FILE_NAME}.tar
 

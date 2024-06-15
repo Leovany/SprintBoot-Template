@@ -130,10 +130,9 @@ jobs:
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
           run: |
-            echo $FILE_NAME
             echo ${{env.Port}}
             # docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
-            docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
+            docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:0.1
             
 
      

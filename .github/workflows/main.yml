@@ -44,9 +44,9 @@ jobs:
           echo "端口号:$Port"
           echo "仓库全名称：$GITHUB_REPOSITORY"
           echo ${GITHUB_REF##*/}
-          echo "服务器地址: ${env.Host_IP}"
-          echo "服务器密码: ${env.Host_PWD}"
-          echo "服务器目录: ${env.Host_Dir}"
+          echo "服务器地址: ${Host_IP}"
+          echo "服务器密码: ${Host_PWD}"
+          echo "服务器目录: ${Host_Dir}"
           echo "================= GITHUB_ENV ============"
           echo "项目名称 (从环境变量): $PROJECT_NAME"
           echo "文件名称 (从环境变量): $FILE_NAME"

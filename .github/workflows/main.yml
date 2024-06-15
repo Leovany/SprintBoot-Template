@@ -32,6 +32,9 @@ jobs:
           echo ${Host_PWD}
           
           echo "PROJECT_NAME=$(basename $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
+          echo "项目名称: $PROJECT_NAME"
+          echo "项目名称: ${PROJECT_NAME}"
+          
           echo "FILE_NAME=${PROJECT_NAME}-backend" >> "$GITHUB_ENV"
           echo "VERSION=0.1" >> "$GITHUB_ENV"
           
@@ -40,9 +43,9 @@ jobs:
           echo "版本号: $VERSION"
 
           
-          printf "项目名称2: $PROJECT_NAME"
-          printf "文件名称2: $FILE_NAME"
-          printf "版本号2: $VERSION"
+          echo "项目名称2: $PROJECT_NAME"
+          echo "文件名称2: $FILE_NAME"
+          echo "版本号2: ${VERSION}"
           
           
           pwd

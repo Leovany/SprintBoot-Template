@@ -21,7 +21,7 @@ jobs:
       # 账号
       Host_Role: root
       # 路径
-      Host_Dir: /cicd
+      Host_Dir: "/cicd"
      
     steps:
       # 定义环境变量

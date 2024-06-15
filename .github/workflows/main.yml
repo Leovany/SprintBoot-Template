@@ -92,9 +92,7 @@ jobs:
           host: ${{env.Host_IP}}
           user: ${{env.Host_Role}}
           pass: ${{env.Host_PWD}}
-          run: |
-            echo ${{env.FILE_NAME}}
-            echo ${{env.VERSION}}
+          run:
             # 停止运行中的docker容器、删除该容器、删除镜像
             docker stop ${{env.FILE_NAME}} || true && docker rm ${{env.FILE_NAME}} || true && docker rmi ${{env.FILE_NAME}}:${{env.VERSION}} || true
 
@@ -112,7 +110,6 @@ jobs:
       # 上传新的docker镜像
       - name: upload new docker image and start-up script
         run:
-          # sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} scp -r -o StrictHostKeyChecking=no ./${FILE_NAME}.tar ${Host_Role}@${{secrets.REMOTE_SERVER01_IP}}:${{secrets.REMOTE_PROJECT_CATALOGUE}}
           sshpass -p ${Host_PWD} scp -r -o StrictHostKeyChecking=no ./${FILE_NAME}.tar ${Host_Role}@${Host_IP}:${Host_Dir}
 
 

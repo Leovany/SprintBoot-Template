@@ -20,11 +20,8 @@ jobs:
       Host_PWD: ${{secrets.REMOTE_SERVER01_PWD}}
       # 账号
       Host_Role: root
-      # Project_Name: ${{GITHUB_REPOSITORY}}
+     
     steps:
-      - name: 设置项目名称环境变量
-        run: echo "Project_Name=$GITHUB_REPOSITORY" >> $GITHUB_ENV
-        
       - name: Print Environment
         run: | 
           echo $Port
@@ -33,7 +30,6 @@ jobs:
           echo ${GITHUB_REF##*/}
           echo ${Host_IP}
           echo ${Host_PWD}
-          ehco ${{env.Project_Name}}
 
       - name: Run sshpass commands4
         uses: matheusvanzan/sshpass-action@v2
@@ -44,31 +40,3 @@ jobs:
           run: |
             cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} 
             rm -f pom.xml
-      
-      # - name: rm Jar  # 删除JAR文件
-      #   uses: appleboy/ssh-action@master  # 使用appleboy的ssh-action，用于在服务器上执行SSH命令
-      #   with:
-      #     host: ${{Host_IP}}  # 设置服务器主机
-      #     username: ${{Host_Role}}  # 设置服务器用户名
-      #     key: ${{Host_PWD}}  # 设置SSH密钥
-      #     script: |
-      #       cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f pom.xml
-           
-
-      # - name: Define remote SSH command base
-      #   run: | 
-      #     echo "SSH_BASE='sshpass -p \"$Host_PWD\" ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV
-          
-      # - name: Define remote SSH command base
-      #   run: | 
-      #     echo "SSH_BASE='sshpass -p \"$Host_PWD\" ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP'" >> $GITHUB_ENV
-          
-      # - name: delete old docker tar
-      #   run: |
-      #     # echo $SSH_BASE
-      #     # $SSH_BASE "rm -f /cicd/pom.xml"
-      #     # echo ""
-      #     SSH_BASE="sshpass -p '$Host_PWD' ssh -o StrictHostKeyChecking=no $Host_Role@$Host_IP"
-      #     echo "SSH_BASE='$SSH_BASE'" >> $GITHUB_ENV
-      #     echo "Running SSH command..."
-      #     $SSH_BASE "rm -f /cicd/pom.xml"

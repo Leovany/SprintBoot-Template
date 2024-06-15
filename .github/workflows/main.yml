@@ -81,6 +81,16 @@ jobs:
           FILE_SIZE_MB=$(echo "scale=2; $(stat -c%s "$FILE_PATH") / (1024 * 1024)" | bc) # 生成文件大小
           echo "Generated file size: $FILE_SIZE_MB MB"
 
+      # 删除旧的docker镜像压缩包
+      - name: delete old docker image
+        uses: matheusvanzan/sshpass-action@v2
+        with:
+          host: ${{env.Host_IP}}
+          user: ${{env.Host_Role}}
+          pass: ${{env.Host_PWD}}
+          run: |
+            rm -f ${{secrets.REMOTE_PROJECT_CATALOGUE}}/${FILE_NAME}.tar
+            
       # 删除旧的docker镜像
       - name: delete old docker image
         uses: matheusvanzan/sshpass-action@v2
@@ -92,15 +102,7 @@ jobs:
             # 停止运行中的docker容器、删除该容器、删除镜像
             docker stop ${FILE_NAME} || true && docker rm ${FILE_NAME} || true && docker rmi ${FILE_NAME}:${VERSION} || true
             
-     # 删除旧的docker镜像压缩包
-      - name: delete old docker image
-        uses: matheusvanzan/sshpass-action@v2
-        with:
-          host: ${{env.Host_IP}}
-          user: ${{env.Host_Role}}
-          pass: ${{env.Host_PWD}}
-          run: |
-            rm -f ${{secrets.REMOTE_PROJECT_CATALOGUE}}/${FILE_NAME}.tar
+     
             
       # 上传新的docker镜像 TODO
       # - name: Upload new docker image and start-up script

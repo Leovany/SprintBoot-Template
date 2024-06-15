@@ -134,7 +134,7 @@ jobs:
           run: |
             echo ${{env.Port}}
             echo "版本1：${VERSION}"
-            echo "版本2：${{env.VERSION}}”
+            echo "版本2：${{env.VERSION}}"
             # docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
             docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${{env.VERSION}}
             

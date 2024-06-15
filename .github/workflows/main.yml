@@ -126,8 +126,7 @@ jobs:
       - name: Run project
         uses: matheusvanzan/sshpass-action@v2
         env:
-          VERSION: 0.1
-          # FILE_NAME_2: sprintboot-template-backend
+          VERSION: ${{env.VERSION}}
           FILE_NAME_2: ${{env.FILE_NAME}}
         with:
           host: ${{env.Host_IP}}
@@ -137,7 +136,8 @@ jobs:
             echo ${{env.Port}}
             echo "版本1：${VERSION}"
             echo "版本2：${{env.VERSION}}"
-            echo "名称：${{env.FILE_NAME_2}}"
+            echo "名称1：${{env.FILE_NAME}}"
+            echo "名称2：${{env.FILE_NAME_2}}"
             # docker run -d -p ${{env.Port}}:8080 --name sprintboot-template-backend sprintboot-template-backend:${VERSION}
             docker run -d -p ${{env.Port}}:8080 --name ${{env.FILE_NAME_2}} ${{env.FILE_NAME_2}}:${{env.VERSION}}
             
